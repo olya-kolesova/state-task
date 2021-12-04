@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class Clock extends React.Component {
+  state = { time: new Date().toLocaleTimeString() };
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({ time: new Date().toLocaleTimeString() })
+    }, 1000)
+  }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  render() {
+    return (
+      <div className="time">
+        The time is: {this.state.time}
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Clock />, document.querySelector('#root'));
